@@ -1,5 +1,5 @@
 # Sheradon #
-### A python app to control a gate or trigger anything else using a telegram bot. ###
+### A python docker app to control a gate or trigger anything else using a telegram bot. ###
 
 ## Usage ##
 
