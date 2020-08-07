@@ -13,13 +13,12 @@
 String readString;
 
 #include "wifi_secrets.h"
-// Please enter your sensitive data in the Secret tab/arduino_secrets.h
-char ssid[] = SECRET_SSID;           // your network SSID (name)
-char pass[] = SECRET_PASS;           // your network password
-char mqtt_user[] = MQTT_USERNAME;    // your MQTT username
-char mqtt_pass[] = MQTT_PASS;        // your MQTT password
-// This should be the same as MQTT_OPEN_COMMAND in config.py
-char open_command[] = MQTT_OPEN_COMMAND;
+// Please enter your sensitive data in wifi_secrets.h
+char ssid[] = SECRET_SSID;                 // your network SSID (name)
+char pass[] = SECRET_PASS;                 // your network password
+char mqtt_user[] = MQTT_USERNAME;          // your MQTT username
+char mqtt_pass[] = MQTT_PASS;              // your MQTT password
+char open_command[] = MQTT_OPEN_COMMAND;   // This should be the same as MQTT_OPEN_COMMAND in config.py
 
 
 // To connect with SSL/TLS:
