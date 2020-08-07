@@ -18,6 +18,9 @@ char ssid[] = SECRET_SSID;           // your network SSID (name)
 char pass[] = SECRET_PASS;           // your network password
 char mqtt_user[] = MQTT_USERNAME;    // your MQTT username
 char mqtt_pass[] = MQTT_PASS;        // your MQTT password
+// This should be the same as MQTT_OPEN_COMMAND in config.py
+char open_command[] = MQTT_OPEN_COMMAND;
+
 
 // To connect with SSL/TLS:
 // 1) Change WiFiClient to WiFiSSLClient.
@@ -108,8 +111,7 @@ void loop() {
 
     Serial.println();
     if (readString.length() > 0) {
-      // This should be the same as MQTT_OPEN_COMMAND in config.py
-      if (readString == "open"){
+      if (readString == open_command){
         Serial.println("Triggered ...");
         digitalWrite(LED_BUILTIN, LOW);
         digitalWrite(outputPin, HIGH);
