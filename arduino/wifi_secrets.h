@@ -2,3 +2,4 @@
 #define SECRET_PASS "your-wifi-password"
 #define MQTT_USERNAME "mqtt-username"
 #define MQTT_PASS "mqtt-password"
+#define MQTT_OPEN_COMMAND "open"
