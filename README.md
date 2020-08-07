@@ -7,12 +7,14 @@
 git clone https://github.com/BionicWeb/Sheradon.git
 cd Sheradon
 ```
-Then please edit config.py:
+Edit config.py:
 ```
 nano config.py
 ```
-run the container:
+Run the container:
 ```
-docker run --rm -d -v $PWD/config.py:/app/config.py -p 5000:5000 bionicweb/sheradon
+docker run --rm -d -v $PWD/config.py:/app/config.py -p 5000:5000 --name sheradon bionicweb/sheradon
 ```
-
+Open sheradon.ino in Arduino IDE
+Make sure to edit settings in wifi_secrets.h
+Upload the sketch to your ESP8266 or ESP32
