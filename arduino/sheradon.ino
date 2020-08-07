@@ -19,7 +19,9 @@ char pass[] = SECRET_PASS;                 // your network password
 char mqtt_user[] = MQTT_USERNAME;          // your MQTT username
 char mqtt_pass[] = MQTT_PASS;              // your MQTT password
 char open_command[] = MQTT_OPEN_COMMAND;   // This should be the same as MQTT_OPEN_COMMAND in config.py
-
+char mqtt_broker[] = MQTT_BROKER;          // your MQTT broker
+int  mqtt_port = MQTT_PORT;                // your MQTT port
+char mqtt_topic[] = MQTT_TOPIC;            // your MQTT topic
 
 // To connect with SSL/TLS:
 // 1) Change WiFiClient to WiFiSSLClient.
@@ -29,11 +31,6 @@ char open_command[] = MQTT_OPEN_COMMAND;   // This should be the same as MQTT_OP
 
 WiFiClient wifiClient;
 MqttClient mqttClient(wifiClient);
-
-const char broker[] = "io.adafruit.com";
-int        port     = 1883;
-// Must be the same as MQTT_COMMAND_TOPIC in config.py
-const char topic[]  = "username/feeds/feedName";
 
 void setup() {
   Serial.begin(115200);
@@ -66,9 +63,9 @@ void setup() {
   mqttClient.setUsernamePassword(mqtt_user,mqtt_pass);
 
   Serial.print("Attempting to connect to the MQTT broker: ");
-  Serial.println(broker);
+  Serial.println(mqtt_broker);
  
-  if (!mqttClient.connect(broker, port)) {
+  if (!mqttClient.connect(mqtt_broker, mqtt_port)) {
     Serial.print("MQTT connection failed! Error code = ");
     Serial.println(mqttClient.connectError());
 
@@ -79,14 +76,14 @@ void setup() {
   Serial.println();
 
   Serial.print("Subscribing to topic: ");
-  Serial.println(topic);
+  Serial.println(mqtt_topic);
   Serial.println();
 
   // subscribe to a topic
-  mqttClient.subscribe(topic);
+  mqttClient.subscribe(mqtt_topic);
 
   Serial.print("Waiting for messages on topic: ");
-  Serial.println(topic);
+  Serial.println(mqtt_topic);
   Serial.println();
 }
 
