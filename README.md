@@ -4,8 +4,8 @@
 ## Usage ##
 
 ```
-git clone https://github.com/BionicWeb/Sheradon.git
-cd Sheradon
+git clone https://github.com/BionicWeb/Sheradon.git ~/Sheradon
+cd ~/Sheradon
 ```
 Edit config.py:
 ```
