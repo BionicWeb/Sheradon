@@ -51,8 +51,14 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
+    retries++;
+    if(retries >= 40) {
+      ESP.restart();
+    }
   }
 
+  retries = 0;
+  
   Serial.println("You're connected to the network");
   Serial.println();
 
