@@ -11,6 +11,7 @@
 
 
 String readString;
+int retries = 0;
 
 #include "wifi_secrets.h"
 // Please enter your sensitive data in wifi_secrets.h
@@ -88,6 +89,21 @@ void setup() {
 }
 
 void loop() {
+  if (!mqttClient.connected()) {
+    retries++;
+    if(retries >= 5) {
+      ESP.restart();
+    }
+    Serial.println("MQTT connection lost");
+    mqttClient.setUsernamePassword(mqtt_user,mqtt_pass);
+    if (!mqttClient.connect(mqtt_broker, mqtt_port)) {
+      Serial.print("MQTT reconnection error ");
+      Serial.println(mqttClient.connectError());
+    }
+  } else {
+    retries = 0;
+  }
+  
   int messageSize = mqttClient.parseMessage();
   if (messageSize) {
     // we received a message, print out the topic and contents
