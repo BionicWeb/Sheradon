@@ -18,6 +18,10 @@ docker run --rm -d -v $PWD/config.py:/app/config.py -p 5000:5000 --name sheradon
 (Optional but Better) Run using docker compose and traefik to get SSL:
 Make sure to replace your email and domain below where it is in CAPS.
 ```
+docker-compose up -d
+```
+
+```
 version: "3.3"
 
 services:
