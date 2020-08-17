@@ -1,0 +1,40 @@
+version: "3.3"
+
+services:
+
+  traefik:
+    image: "traefik:v2.2"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      #- "--api=true"
+      #- "--api.insecure=true"
+      #- "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=YOUR@EMAIL.COM"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+      #- "8080:8080"
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  sheradon:
+    image: "bionicweb/sheradon"
+    container_name: "sheradon"
+    ports:
+      - "5000:5000"
+    volumes:
+      - "${HOME}/Sheradon/config.py:/app/config.py"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sheradon.rule=Host(`YOUR.DOMAIN.COM`)"
+      - "traefik.http.routers.sheradon.entrypoints=websecure"
+      - "traefik.http.routers.sheradon.tls.certresolver=myresolver"
